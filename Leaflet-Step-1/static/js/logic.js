@@ -6,22 +6,19 @@ function circlesize(mag) {
 
 function dataColor(mag) {
   if (mag >= 5 ) {
-    return "red";
+    return "#e6e60d";
   }
   else if (mag >= 4) {
-    return "green";
+    return "#d2d216";
   }
   else if (mag >= 3) {
-    return "yellow";
+    return "#b9b91d";
   }
   else if (mag >= 2) {
-    return "orange";
-  }
-  else if (mag >= 1) {
-    return "turquoise";
+    return "#9b9b28";
   }
   else {
-    return "maroon";
+    return "#e9a345";
   }
 };
 
@@ -83,12 +80,12 @@ var myMap = L.map("map", {
 var legend = L.control({ position: "bottomright" });
 legend.onAdd = function() {
   var div = L.DomUtil.create("div", "info legend");
-  // var limits = geojson.options.limits;
-  // var colors = geojson.options.colors;
-  var labels = ["0-1", "1-2", "2-3", "3-4", "4-5", "5+"];
-
-  for (var i = 0; i < labels.length; i++) {
-    div.innerHTML += '<i style="background:' + dataColor[i] + ' "></i> ' + labels[i] + '<br>';
+  limits = [0, 1, 2, 3, 4, 5];
+  var labels = [];
+    
+  for (var i = 0; i < limits.length; i++) {
+    div.innerHTML += '<i style="background:' + dataColor(limits[i] + 1) + '"></i> ' +
+    limits[i] + (limits[i + 1] ? '-' + limits[i + 1] + '<br>' : '+');
   }
   return div;
 
